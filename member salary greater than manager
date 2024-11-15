@@ -1,0 +1,4 @@
+joindf=df.alias('employee').join(df.alias("manager"),col("employee.managerId")==col("manager.id"),"inner")
+joinDF.display()
+filterDf=joinDf.filter(col("employee.salary")>col("manager.salary"))
+filterDf.display()
