@@ -1,0 +1,2 @@
+sf=sf.withColumn("avg_salary",avg(col("salary")).over(window_spec))
+win=sf.filter(col("salary")>col("avg_salary"))
