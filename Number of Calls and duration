@@ -1,0 +1,13 @@
+sapDf=(df.withColumn("Person1",when(col("from_id")<col("to_id),col("from_id")).otherwise(col("to_id")))
+.withColumn("Person2",when(col("from_id")<col("to_id"),col("to_id")).otherwise(col("from_id")))
+.select("Person11","Person2","duration"))
+sapDf.display()
+
+resultDf=(sapDf.groupBy(col("Person1"),col("Person2"))
+.agg(sum(col("duration")).alias("total_duration"),count(col("Person1")).alias("call_count"))
+.select("Person1","Person2","call_count","total_duration"))
+resultDf.display()
+
+
+
+
