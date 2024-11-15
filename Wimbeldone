@@ -1,0 +1,9 @@
+cte1=champions_df.select("year",col("Wimbeldone"),alias("Player"))
+.unionAll(championships_df.select("year",col("Fr_open").alias("Player")))
+.unionAll(championships_df.select("year",col("US_open").alias("Player"))
+.unionAll(championships_df.select("year",col("AU_open").alias("Player"))
+cte1.display()
+
+cte2=cte1.groupBy("player").agg(count('*').alias("grand_slams_count")
+result_df=cte2.join(players_df,cte2.player==player_df.player_id,"inner").select
+("Player_id","Player_name","grand_slams_count")
