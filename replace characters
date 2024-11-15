@@ -1,0 +1,4 @@
+new_df=originaldf.withColumn("lastName",when(col("lastName").contains("!"),"").otherwise(col("lastName"))).withColumn("lastName",when(col("lastName").contains("$"),"").otherwise(col("lastName")))\
+.withColumn("lastName",when(col("lastName").contains("#"),"").otherwise(col("lastName")))..withColumn("lastName",when(col("lastName").contains("@"),"").otherwise(col("lastName")))
+
+new_df=originaldf.withColumn("lastName",regexp_replace(col("lastName"),"[!$@]",""))
