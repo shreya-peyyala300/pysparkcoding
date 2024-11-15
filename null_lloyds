@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=VMriYfBP2z0&list=PLNRxk1s77zfj2M2MuCuEPy_k25bUbv1Py&index=2
+
+df1=df.withColumn("firstnull",coalesce(when(df.city1=="",None).otherwise(df.city1),
+when(df.city2=="",None).otherwise(df.city2),
+when(df.city3=="",None).otherwise(df.city3)))
+df1.display()
