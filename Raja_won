@@ -1,0 +1,10 @@
+from pyspark.sql.window import Window
+df1=df.withColumn("event_change",when(col("event_status")!=lag("event_status").over(Window.orderBy("event_date)),1).otherwise(0))
+df1.display()
+
+--calculate running sum to create windows
+df2=df1.withColumn("event_group",sum("event_change").over(Window.orderBy("event_date)))
+df2.display()
+
+output=df2.groupBy("event_group","event_status").agg(first("event_date").alias("start_date"),last("event_date").alias("end_date")).drop("event_group")
+output.display()
