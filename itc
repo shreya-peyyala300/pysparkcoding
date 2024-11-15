@@ -1,0 +1,32 @@
+https://www.youtube.com/watch?v=D71n1wKrmNQ&list=PLxHEfsUVhEwMvQBr10rrpEsnwT3AXBKke&index=2
+One of the PySpark questions recently asked in ITC Limited interview.
+Given us Players and Countries dataframe, We need to find total numbers of 50s and 100s for palyers.
+
+In order to solve this questions, we used WithColumn, Filter and Join Transformations. You will understand the functionality of WithColumn, Filter and Join Transformations
+
+Mentioning the dataframe details here
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+
+Define the schema
+schema = StructType([
+    StructField("player", StringType(), True),
+    StructField("runs", IntegerType(), True),
+    StructField("50s/100s", StringType(), True)
+])
+
+Create a DataFrame with the defined schema
+data = [("Sachin-IND", 18694, "93/49"), ("Ricky-AUS", 11274, "66/31"),("Lara-WI", 10222, "45/21"),("Rahul-IND", 10355, "95/11"),("Jhonty-SA", 7051, "43/5"),("Hayden-AUS", 8722, "67/19")]
+players_df = spark.createDataFrame(data, schema)
+
+data1 = [("IND", "India"), ("AUS", "Australia"), ("WI", "WestIndies"), ("SA", "SouthAfrica")]
+countries_df = spark.createDataFrame(data1,["SRT","country"])
+
+playy=player_df.withColumn("playername",split(player_df['player'],'-').getItem(0))
+.withColumn("playername",split(player_df['player'],'-').getItem(1))
+.withColumn("50s",split(player_df['50s/100s'],'/').getItem(0))
+.withColumn("100s",split(player_df['50s/100s'],'/').getItem(1))
+.select("PlayerName",'runs',"srt","50s","100s")
+playy=playy.withColumn("sum",col("50s")+col("100s")).filter('sum>=90').select("Playername","run","srt","sum")
+
+playde=playy.join(countries_df,players_df...................................,inner))
