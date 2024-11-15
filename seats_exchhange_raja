@@ -1,0 +1,9 @@
+exchangedf=df.withColumn("prev_student",lag('student').over(Window.orderBy('id')))
+exchangeDf=exchangeDf.withColumn('next_student',lead("student").over(Window.orderBy('id')))
+display(exchangeDf)
+
+exchangeDf=exchangeDF.withColumn('Exchanged_seating',when(exchangDF['id']%2==1,coleasce(exchangeDF['next_student'],exchangeDF['student'])).
+                        when(exchangDF['id']%2==0,coleasce(exchangeDF['prev_student'],exchangeDF['student']))
+                        .otherwise(exchangeDF['student']))
+exchangeDF=exchangeDf.withColumnRenamed("student","Original_Seating").drop('prev_student','next_student')
+exchangeDf.display()
