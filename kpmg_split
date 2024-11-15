@@ -1,0 +1,2 @@
+from pyspark.sql.functions import split,explode
+display(df.select(df.Name,explode(split(df.Hobbies,",")).alias("")))
