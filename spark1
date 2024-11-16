@@ -1,0 +1,36 @@
+Dataframe Create Code :
+======================
+1) 
+product_data = [
+ (1, 'Laptops', 'Electronics'),
+ (2, 'Jeans', 'Clothing'),
+ (3, 'Chairs', 'Home Appliances')
+ ]
+
+product_schema = ['product_id', 'product_name', 'category']
+
+product_df = spark.createDataFrame(data = product_data , schema = product_schema)
+product_df.show()
+
+
+2) 
+sales_data = [
+ (1, 2019, 1000.00),
+ (1, 2020, 1200.00),
+ (1, 2021, 1100.00),
+ (2, 2019, 500.00),
+ (2, 2020, 600.00),
+ (2, 2021, 900.00),
+ (3, 2019, 300.00),
+ (3, 2020, 450.00),
+ (3, 2021, 400.00)
+ ]
+
+
+sales_schema = ['product_id', 'year', 'total_sales_revenue']
+
+sales_df = spark.createDataFrame(data = sales_data , schema = sales_schema)
+sales_df.show()
+
+apply lag
+find min
