@@ -1,0 +1,8 @@
+with cte1 as (
+select * , 
+row_number() over(order by (select null)) rn  
+from brands
+)
+	select min(category) over(order by rn rows between unbounded preceding and current row) category, 
+	brand_name
+	from cte1
